@@ -12,11 +12,10 @@ curl --unix-socket /var/ol/default/worker/ol.sock http://unix/pid
 cat /var/ol/default/worker/worker.pid
 
 # HTTP status
-echo 'curl -s http://localhost:5000/registry'
-curl -s http://localhost:5000/registry
-echo 'curl -i http://localhost:5000/status'
-curl -i http://localhost:5000/status
-echo 'curl -i -X POST http://localhost:5000/run/L0'
-curl -i -X POST http://localhost:5000/run/L0
+echo 'curl -s http://localhost:5000/registry/'
+curl -s http://localhost:5000/registry/
+./ol admin install -p /var/ol/default examples/echo/
+echo 'curl -s http://localhost:5000/registry/'
+curl -s http://localhost:5000/registry/
 
 ./ol worker down -p ${WORKER_PATH}
