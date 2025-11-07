@@ -49,7 +49,6 @@ func (s *LambdaServer) RunLambda(w http.ResponseWriter, r *http.Request) {
 	// components represent run[0]/<name_of_sandbox>[1]/<extra_things>...
 	// ergo we want [1] for name of sandbox
 	urlParts := getURLComponents(r)
-	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Content-Type", "text/plain; charset=utf-8")
 
 	if len(urlParts) < 2 {

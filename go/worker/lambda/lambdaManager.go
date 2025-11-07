@@ -202,6 +202,7 @@ func (_ *LambdaMgr) DumpStatsToLog() {
 // Cleanup performs cleanup operations for the LambdaMgr and its subsystems.
 func (mgr *LambdaMgr) Cleanup() {
 	mgr.mapMutex.Lock()
+	defer mgr.mapMutex.Unlock()
 
 	// check if server was already shutdown
 	if mgr.isClosed {
@@ -222,7 +223,6 @@ func (mgr *LambdaMgr) Cleanup() {
 		slog.Info(fmt.Sprintf("Kill function: %s", f.name))
 		f.Kill()
 	}
-	mgr.mapMutex.Unlock()
 
 	if mgr.ZygoteProvider != nil {
 		mgr.ZygoteProvider.Cleanup()
